@@ -1,9 +1,8 @@
 import mongoose from "mongoose";
 
-const uri: string = process.env.MONGO_URI || "";
 const connectDB = async () => {
   try {
-    await mongoose.connect(uri);
+    await mongoose.connect(process.env.MONGO_URI as string);
   } catch (error) {
     process.exit(1);
   }
