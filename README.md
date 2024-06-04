@@ -1,10 +1,27 @@
-# Express with TypeScript Standard Template
+# Express JWT Authentication
 
-## Overview
+This repository contains an implementation of JWT-based authentication in an Express.js application. The goal of this project is to provide a robust and scalable solution for managing user authentication and authorization using JSON Web Tokens (JWT).
 
-This project is a backend API application template built with Node.js, Express.js, and TypeScript. It provides a structured foundation for developing robust and maintainable APIs with TypeScript's type-safety and Express's powerful routing capabilities.
+## Table of Contents
 
-## Features
+- [Code Standard](#code-section)
+
+  - [Tech Used](#tech-names)
+
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+  - [Running the Server](#running-the-server)
+  - [API Endpoints](#api-endpoints)
+- [Configuration](#configuration)
+- [Built With](#built-with)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Code Section
+
+### Tech Names
 
 - **TypeScript**: Leverages TypeScript for type-safety and modern JavaScript features.
 - **Express**: Utilizes Express for building scalable and efficient APIs.
@@ -15,254 +32,101 @@ This project is a backend API application template built with Node.js, Express.j
 
 ## Getting Started
 
+These instructions will help you set up and run the project on your local machine for development and testing purposes.
+
 ### Prerequisites
 
-- Node.js (>= 14.x)
-- npm (>= 6.x) or yarn (>= 1.x)
+Ensure you have the following installed on your machine:
+
+- [Node.js](https://nodejs.org/en/download/)
+- [npm](https://www.npmjs.com/get-npm) or [yarn](https://yarnpkg.com/getting-started/install)
 
 ### Installation
 
-1. **Clone the repository**:
+1. Clone the repository:
 
-   ```bash
-   git clone https://github.com/your-username/express-typescript-template.git
-   cd express-typescript-template
+   ```sh
+   git clone https://github.com/seamoonpandey/express-jwt-auth.git
+   cd express-jwt-auth
    ```
 
-2. **Install dependencies**:
+2. Install the dependencies:
 
-   ```bash
+   ```sh
    npm install
    # or
    yarn install
    ```
 
-3. **Create a `.env` file**:
+## Usage
 
-   ```bash
-   cp .env.example .env
-   ```
+### Running the Server
 
-4. **Set environment variables** in the `.env` file:
+To start the server in development mode, use the following command:
 
-   ```env
-   PORT=3000
-   ```
-
-### Running the Application
-
-#### Development
-
-To start the application in development mode with automatic restarts using Nodemon:
-
-```bash
+```sh
 npm run dev
 # or
 yarn dev
 ```
 
-The server will start on the port specified in the `.env` file (default: 3000).
+The server will start on `http://localhost:5000`.
 
-#### Production
+### API Endpoints
 
-To build and start the application in production mode:
+The following endpoints are available in this application:
 
-```bash
-npm run build
-npm start
-# or
-yarn build
-yarn start
+- `POST /api/users/register`: Register a new user.
+- `POST /api/users/login`: Authenticate a user and issue a JWT.
+- `GET /api/users/profile`: Get the profile of the authenticated user (protected route).
+
+### Example API Requests
+
+#### Register a new user
+
+```sh
+curl -X POST http://localhost:5000/api/users/register -H "Content-Type: application/json" -d '{"name": "John Doe", "email": "john@example.com", "password": "password123"}'
 ```
 
-### Linting and Formatting
+#### Authenticate a user
 
-To lint the code using ESLint:
-
-```bash
-npm run lint
-# or
-yarn lint
+```sh
+curl -X POST http://localhost:5000/api/users/login -H "Content-Type: application/json" -d '{"email": "john@example.com", "password": "password123"}'
 ```
 
-To format the code using Prettier:
+#### Get user profile (requires JWT)
 
-```bash
-npm run format
-# or
-yarn format
+```sh
+curl -X GET http://localhost:5000/api/users/profile -H "Authorization: Bearer YOUR_JWT_TOKEN"
 ```
 
-## Project Structure
+## Configuration
 
-```bash
+The application configuration is managed through environment variables. Create a `.env` file in the root directory of the project and add the following variables:
 
-├── src
-│   ├── controllers      # Define your controllers here
-│   ├── middlewares      # Define custom middlewares here
-│   ├── routes           # Define the application routes here
-│   ├── services         # Define your services here
-│   ├── utils            # Utility functions
-│   ├── index.ts         # Entry point of the application
-├── tests                # Test files
-├── .env.example         # Example environment variables file
-├── .eslintrc.js         # ESLint configuration
-├── .prettierrc          # Prettier configuration
-├── jest.config.js       # Jest configuration
-├── tsconfig.json        # TypeScript configuration
-├── package.json         # Project dependencies and scripts
-└── README.md            # Project documentation
+```env
+PORT=5000
+MONGO_URI=your_mongodb_uri
+JWT_SECRET=your_jwt_secret
+NODE_ENV=development
 ```
 
-## Usage Guide
+## Built With
 
-### Step-by-Step Guide to Customizing the Template
-
-1. **Fork the repository**:
-
-   - Navigate to the repository on GitHub and fork it to your own account.
-
-2. **Clone your forked repository**:
-
-   ```bash
-   git clone https://github.com/your-username/express-typescript-template.git
-   cd express-typescript-template
-   ```
-
-3. **Change the project name**:
-
-   - Update `package.json` with your project name and description:
-
-     ```json
-     {
-       "name": "your-project-name",
-       "version": "1.0.0",
-       "description": "Your project description",
-       ...
-     }
-     ```
-
-4. **Install dependencies**:
-
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
-
-5. **Set up environment variables**:
-
-   - Create a `.env` file by copying the example:
-
-     ```bash
-     cp .env.example .env
-     ```
-
-   - Edit the `.env` file with your configuration:
-
-     ```env
-     PORT=3000
-     ```
-
-6. **Run the application in development mode**:
-
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
-
-7. **Build and run the application in production mode**:
-
-   ```bash
-   npm run build
-   npm start
-   # or
-   yarn build
-   yarn start
-   ```
-
-### Adding New Features
-
-1. **Add a new route**:
-
-   - Create a new file in `src/routes` (e.g., `example.route.ts`):
-
-     ```typescript
-     import { Router } from "express";
-     import { exampleController } from "../controllers/example.controller";
-
-     const router = Router();
-
-     router.get("/example", exampleController);
-
-     export default router;
-     ```
-
-   - Register the new route in `src/index.ts`:
-
-     ```typescript
-     import express from "express";
-     import exampleRoute from "./routes/example.route";
-
-     const app = express();
-     const port = process.env.PORT || 3000;
-
-     app.use(express.json());
-
-     app.use("/api", exampleRoute);
-
-     app.listen(port, () => {
-       console.log(`Server is running on port ${port}`);
-     });
-     ```
-
-2. **Add a new controller**:
-
-   - Create a new file in `src/controllers` (e.g., `example.controller.ts`):
-
-     ```typescript
-     import { Request, Response } from "express";
-
-     export const exampleController = (req: Request, res: Response): void => {
-       res.json({ message: "Hello from the example controller!" });
-     };
-     ```
-
-3. **Add a new service**:
-
-   - Create a new file in `src/services` (e.g., `example.service.ts`):
-
-     ```typescript
-     export const exampleService = (): string => {
-       return "This is a message from the example service!";
-     };
-     ```
-
-   - Use the service in the controller:
-
-     ```typescript
-     import { Request, Response } from "express";
-     import { exampleService } from "../services/example.service";
-
-     export const exampleController = (req: Request, res: Response): void => {
-       const message = exampleService();
-       res.json({ message });
-     };
-     ```
+- [Express](https://expressjs.com/) - Fast, unopinionated, minimalist web framework for Node.js
+- [Mongoose](https://mongoosejs.com/) - Elegant MongoDB object modeling for Node.js
+- [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) - JSON Web Token implementation for Node.js
 
 ## Contributing
 
-If you would like to contribute to this project, please follow the guidelines in [CONTRIBUTING.md](CONTRIBUTING.md).
+Contributions are welcome! Please fork the repository and use a feature branch. Pull requests are warmly welcome.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-For questions or discussions, please open an issue in the repository.
-
----
-
-Happy coding! 🚀
