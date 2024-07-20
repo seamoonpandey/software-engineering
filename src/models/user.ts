@@ -8,6 +8,9 @@ export interface IUser extends Document {
   password: string;
   isAdmin: boolean;
   matchPassword: (enteredPassword: string) => Promise<boolean>;
+  profilePic: string;
+  address: string;
+  phone: string;
 }
 
 const userSchema: Schema<IUser> = new mongoose.Schema(
@@ -16,6 +19,9 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     isAdmin: { type: Boolean, required: true, default: false },
+    profilePic: { type: String, required: false },
+    address: { type: String, required: false },
+    phone: { type: String, required: true },
   },
   { timestamps: true },
 );
