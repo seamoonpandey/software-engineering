@@ -3,7 +3,7 @@ import asyncHandler from "express-async-handler";
 import { Request, Response, NextFunction } from "express";
 import User, { IUser } from "../models/user";
 
-interface AuthenticatedRequest extends Request {
+export interface AuthenticatedRequest extends Request {
   user?: IUser;
 }
 
