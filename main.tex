@@ -80,42 +80,37 @@
 \input{./sections/titlepage}
 \pagenumbering{roman}
 
-\chapter*{Acknowledgement}%
-\addcontentsline{toc}{chapter}{Acknowledgement}%
-\label{acknowledgement}%
-\input{sections/acknowledgement}
-
-
-
-\chapter*{Abstract}%
-\addcontentsline{toc}{chapter}{Abstract}%
-\label{abstract}%
-\input{sections/abstract}
 
 \tableofcontents
 \thispagestyle{empty}
 \addtocounter{page}{-1}
 \newpage
 
-\listoffigures
-\addcontentsline{toc}{chapter}{List of Figures}
-\newpage
+% \listoffigures
+% \addcontentsline{toc}{chapter}{List of Figures}
+% \newpage
 
-\listoftables
-\addcontentsline{toc}{chapter}{List of Tables}
-\newpage
+% \listoftables
+% \addcontentsline{toc}{chapter}{List of Tables}
+% \newpage
 
-\chapter*{Abbreviations}%
-\addcontentsline{toc}{chapter}{Abbreviations}%
-\label{abbreviations}%
-\input{sections/abbreviations}
-\newpage
 
 
 \pagenumbering{arabic}
 \chapter{Introduction}%
 \label{introduction}%
 \input{chapters/introduction}
+\newpage
 
+\chapter{Overall Description}%
+\label{description}%
+\input{chapters/overall_description}
+\newpage
+
+
+\chapter*{Abbreviations}%
+\addcontentsline{toc}{chapter}{Abbreviations}%
+\label{abbreviations}%
+\input{sections/abbreviations}
 
 \end{document}
