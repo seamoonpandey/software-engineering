@@ -4,8 +4,7 @@ import Typography from "./Typography";
 import HeroLayout from "./HeroLayout";
 
 const backgroundImage =
-  "https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400";
-
+"https://images.unsplash.com/photo-1655572606523-d6f5272c06e5?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 export default function ProductHero() {
   return (
     <HeroLayout
