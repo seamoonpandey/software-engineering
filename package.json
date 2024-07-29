@@ -13,9 +13,11 @@
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^5.16.5",
     "@mui/material": "^5.16.5",
+    "final-form": "^4.20.10",
     "next": "14.2.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-final-form": "^6.5.9"
   },
   "devDependencies": {
     "@types/node": "^20",
