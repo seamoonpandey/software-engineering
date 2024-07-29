@@ -7,6 +7,7 @@ import userRoutes from "./routes/userRoutes";
 import { errorHandler, notFound } from "./middleware/errorMiddleware";
 import categoryRoutes from "./routes/categoryRoutes";
 import itemRoutes from "./routes/itemRoutes";
+import saleRoutes from "./routes/saleRoutes";
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ app.use(cookieParser());
 app.use("/api/users", userRoutes);
 app.use("api/category", categoryRoutes);
 app.use("/api/items", itemRoutes);
+app.use("/api/transactions", saleRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Express + Ts Server");
