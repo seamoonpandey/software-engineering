@@ -45,7 +45,6 @@ function AppAppBar() {
           </Box>
         </Toolbar>
       </AppBar>
-      <Toolbar />
     </div>
   );
 }
