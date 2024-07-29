@@ -29,7 +29,7 @@ app.use("/api/items", itemRoutes);
 app.use("/api/transactions", saleRoutes);
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Express + Ts Server");
+  res.send("Welcome to ePurano service");
 });
 
 app.use(notFound);
