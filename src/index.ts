@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import multer from "multer";
+import cors from "cors";
 import connectDB from "./config/db";
 import userRoutes from "./routes/userRoutes";
 import { errorHandler, notFound } from "./middleware/errorMiddleware";
@@ -20,6 +21,8 @@ connectDB();
 app.use(express.urlencoded({ extended: true }));
 app.use(upload.array("fieldName"));
 app.use(express.json());
+
+app.use(cors());
 
 app.use(cookieParser());
 
