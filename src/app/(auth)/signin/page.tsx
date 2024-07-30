@@ -15,7 +15,21 @@ import { Typography } from '@mui/material';
 function SignIn() {
   const [sent, setSent] = React.useState(false);
   const [submitError, setSubmitError] = React.useState<string | null>(null);
+  const [loading, setLoading] = React.useState(true);
   const router = useRouter();
+
+  React.useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        await axios.get('http://localhost:8000/api/users/profile', { withCredentials: true });
+        router.push('/dashboard');
+      } catch (error) {
+        setLoading(false);
+      }
+    };
+  
+    checkAuth();
+  }, [router]);
 
   const validate = (values: { [index: string]: string }) => {
     const errors = required(['email', 'password'], values);
@@ -30,28 +44,36 @@ function SignIn() {
     return errors;
   };
 
-  const handleSubmit = async (values: { email: string; password: string }) => {
-    setSent(true);
-    setSubmitError(null);
+const handleSubmit = async (values: { email: string; password: string }) => {
+  setSent(true);
+  setSubmitError(null);
 
-    try {
-      await axios.post('http://localhost:8000/api/users/auth', {
-        email: values.email,
-        password: values.password,
-      });
+  try {
+    // Make API call to sign in
+    await axios.post('http://localhost:8000/api/users/auth', {
+      email: values.email,
+      password: values.password,
+    }, {
+      withCredentials: true // Include cookies in the request
+    });
 
-      router.push('/dashboard'); 
+    // Redirect to dashboard upon successful sign-in
+    router.push('/dashboard');
+  } catch (error: any) {
+    setSubmitError(error.response?.data?.message || 'Something went wrong, please try again.');
+    setSent(false);
+  }
+};
 
-    } catch (error: any) {
-      setSubmitError(error.response?.data?.message || 'Something went wrong, please try again.');
-      setSent(false);
-    }
-  };
+  // Show a loading spinner or some UI element while checking authentication
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <AppForm>
       <React.Fragment>
-        <Typography variant="h3" gutterBottom  align="center" component="h3">
+        <Typography variant="h3" gutterBottom align="center" component="h3">
           {"Sign In"}
         </Typography>
         <Typography variant="body2" align="center">
