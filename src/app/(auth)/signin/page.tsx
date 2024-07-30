@@ -45,24 +45,29 @@ function SignIn() {
   };
 
 const handleSubmit = async (values: { email: string; password: string }) => {
-  setSent(true);
-  setSubmitError(null);
+    setSent(true);
+    setSubmitError(null);
 
-  try {
-    // Make API call to sign in
-    await axios.post('http://localhost:8000/api/users/auth', {
-      email: values.email,
-      password: values.password,
-    }, {
-      withCredentials: true // Include cookies in the request
-    });
+    try {
+        // Make API call to sign in
+        const response = await axios.post('http://localhost:8000/api/users/auth', {
+            email: values.email,
+            password: values.password,
+        }, {
+            withCredentials: true
+        });
 
-    // Redirect to dashboard upon successful sign-in
-    router.push('/dashboard');
-  } catch (error: any) {
-    setSubmitError(error.response?.data?.message || 'Something went wrong, please try again.');
-    setSent(false);
-  }
+        // Store token data in local storage
+        localStorage.setItem('_id', response.data._id);
+        localStorage.setItem('isAdmin', response.data.isAdmin);
+        localStorage.setItem('token', response.data.token);
+
+        // Redirect to dashboard upon successful sign-in
+        router.push('/dashboard');
+    } catch (error: any) {
+        setSubmitError(error.response?.data?.message || 'Something went wrong, please try again.');
+        setSent(false);
+    }
 };
 
   // Show a loading spinner or some UI element while checking authentication
