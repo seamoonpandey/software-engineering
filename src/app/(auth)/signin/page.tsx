@@ -101,7 +101,7 @@ function SignIn() {
           )}
         </Form>
         <Typography align="center">
-          <Link underline="always" href="/premium-themes/onepirate/forgot-password/">
+          <Link underline="always" href="#">
             Forgot password?
           </Link>
         </Typography>
