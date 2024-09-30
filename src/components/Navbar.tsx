@@ -29,6 +29,15 @@ function AppAppBar() {
               color="inherit"
               variant="h6"
               underline="none"
+              href="/allproducts"
+              sx={rightLink}
+            >
+              {"All Products"}
+            </Link>
+            <Link
+              color="inherit"
+              variant="h6"
+              underline="none"
               href="/categories"
               sx={rightLink}
             >
